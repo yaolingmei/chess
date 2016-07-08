@@ -1,0 +1,8 @@
+canvas{
+    position: absolute;
+    left: 50%;
+    margin-left: -225px;
+    box-shadow: 0 0 2px 2px #888888;
+    top: 50%;
+    margin-top: -225px;
+}
