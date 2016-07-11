@@ -1,6 +1,7 @@
 var canvas=document.getElementById('myCanvas');
 var ctx=canvas.getContext('2d');
 var flag=true;
+var isWell=false;
 //定义数组储存棋子,初始化
 var model = [];
 for(var i=0;i<15;i++){
@@ -50,21 +51,28 @@ canvas.onclick = function (e) {
     var y = e.offsetY;
     var i = Math.floor(x / 30);
     var j = Math.floor(y / 30);
-    //判断无子才能落子
-    if (model[i][j] == 0) {
-        //画棋子
-        chessmodel(i, j, flag);
-        if (flag) {
-            model[i][j] = 1;
-            //判断是否赢
-            judge(i, j, 1);
-        } else {
-            model[i][j] = 2;
-            //判断是否赢
-            judge(i, j, 2);
+    //判断棋局是否已结束
+    if(!isWell){
+        //判断无子才能落子
+        if (model[i][j] == 0) {
+            //画棋子
+            chessmodel(i, j, flag);
+            if (flag) {
+                model[i][j] = 1;
+                //判断是否赢
+                judge(i, j, 1);
+            } else {
+                model[i][j] = 2;
+                //判断是否赢
+                judge(i, j, 2);
+            }
+            flag = !flag;
         }
-        flag = !flag;
+    }else{
+        alert("棋局已有胜负，请刷新后重新开始")
     }
+
+
 }
 //是否赢的函数
 function judge(x, y, chess) {//判断该局棋盘是否赢了
